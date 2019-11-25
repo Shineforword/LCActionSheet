@@ -43,7 +43,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.clipsToBounds = YES;
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor whiteColor];
         
 //        UIView *selBgView = [[UIView alloc] init];
 //        selBgView.backgroundColor = LC_ACTION_SHEET_BG_COLOR_HIGHLIGHTED;

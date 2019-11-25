@@ -155,7 +155,11 @@ NS_ASSUME_NONNULL_BEGIN
 ///**
 // ActionSheet's edge insets. Default is `UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)`.
 // */
-//@property (nonatomic, assign) UIEdgeInsets actionSheetEdgeInsets;
+@property (nonatomic, assign) UIEdgeInsets actionSheetEdgeInsets;
+//取消按钮-sheet间隙
+@property (nonatomic, assign) CGFloat cancelButtonSheetGap;
+//
+@property (nonatomic, strong) UIColor * darkViewBgColor;
 
 /**
  Cell's separator color. Default is `RGBA(170/255.0f, 170/255.0f, 170/255.0f, 0.5f)`.

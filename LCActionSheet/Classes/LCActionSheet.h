@@ -222,10 +222,16 @@ typedef void(^LCActionSheetDidDismissHandler)(LCActionSheet *actionSheet, NSInte
  Button's edge insets. Default is `UIEdgeInsetsMake(8.0, 15.0, 8.0f, 15.0f)`.
  */
 @property (nonatomic, assign) UIEdgeInsets buttonEdgeInsets;
-///**
+
+/* 新增*/
 // ActionSheet's edge insets. Default is `UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)`.
-// */
-//@property (nonatomic, assign) UIEdgeInsets actionSheetEdgeInsets;
+@property (nonatomic, assign) UIEdgeInsets actionSheetEdgeInsets;
+//取消按钮-sheet间隙
+@property (nonatomic, assign) CGFloat cancelButtonSheetGap;
+//上部灰色蒙层
+@property (nonatomic, strong) UIColor * darkViewBgColor;
+
+/* ...............................*/
 
 /**
  Cell's separator color. Default is `RGBA(170/255.0f, 170/255.0f, 170/255.0f, 0.5f)`.

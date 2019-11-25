@@ -277,7 +277,11 @@
     _unBlur                          = config.unBlur;
     _blurEffectStyle                 = config.blurEffectStyle;
     _titleEdgeInsets                 = config.titleEdgeInsets;
-//    _actionSheetEdgeInsets           = config.actionSheetEdgeInsets;
+    
+    _actionSheetEdgeInsets           = config.actionSheetEdgeInsets;
+    _cancelButtonSheetGap            = config.cancelButtonSheetGap;
+    _darkViewBgColor                 = config.darkViewBgColor;
+    
     _separatorColor                  = config.separatorColor;
     _blurBackgroundColor             = config.blurBackgroundColor;
     _autoHideWhenDeviceRotated       = config.autoHideWhenDeviceRotated;
@@ -290,6 +294,7 @@
     _cancelButtonBgColor             = config.cancelButtonBgColor;
     _buttonBgColor                   = config.buttonBgColor;
     _buttonCornerRadius              = config.buttonCornerRadius;
+    
 
     return self;
 }
@@ -375,7 +380,10 @@
         make.height.equalTo(@(height));
     }];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.clipsToBounds = YES;
+    tableView.layer.cornerRadius = 5;
     self.tableView = tableView;
+    
     
 
     UIView *lineView  = [[UIView alloc] init];
@@ -386,7 +394,7 @@
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(bottomView);
         make.bottom.equalTo(tableView.mas_top);
-        make.height.offset(1 / 3.0);
+        make.height.offset(0.5 / 3.0);
     }];
     self.lineView = lineView;
     
@@ -641,6 +649,26 @@
     [self updateTitleLabel];
     [self updateTableView];
 }
+- (void)setActionSheetEdgeInsets:(UIEdgeInsets)actionSheetEdgeInsets{
+    _actionSheetEdgeInsets = actionSheetEdgeInsets;
+    [self updateTitleLabel];
+    [self updateBottomView];
+    [self updateTableView];
+    [self updateCancelButton];
+}
+- (void)setCancelButtonSheetGap:(CGFloat)cancelButtonSheetGap{
+    _cancelButtonSheetGap = cancelButtonSheetGap;
+    [self updateBottomView];
+}
+- (void)setButtonCornerRadius:(CGFloat)buttonCornerRadius{
+    _buttonCornerRadius = buttonCornerRadius;
+    [self updateBottomView];
+    [self updateCancelButton];
+}
+- (void)setDarkViewBgColor:(UIColor *)darkViewBgColor{
+    _darkViewBgColor = darkViewBgColor;
+    [self updateBottomView];
+}
 
 - (void)setSeparatorColor:(UIColor *)separatorColor {
     _separatorColor = separatorColor;
@@ -651,10 +679,14 @@
                                  forState:UIControlStateHighlighted];
     [self.tableView reloadData];
 }
+- (void)setCancelButtonBgColor:(UIColor *)cancelButtonBgColor{
+    _cancelButtonBgColor = cancelButtonBgColor;
+    [self updateCancelButton];
+}
+    
 
 - (void)setBlurBackgroundColor:(UIColor *)blurBackgroundColor {
     _blurBackgroundColor = blurBackgroundColor;
-    
     self.blurEffectView.backgroundColor = blurBackgroundColor;
 }
 
@@ -718,13 +750,25 @@
 #pragma mark - Update Views
 
 - (void)updateBottomView {
+    self.whiteBgView.clipsToBounds = YES;
+    self.whiteBgView.layer.cornerRadius = self.buttonCornerRadius;
+    self.darkView.backgroundColor = self.darkViewBgColor;
+    
     [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
         CGFloat height =
         (self.title.length > 0 ? self.titleTextSize.height + 2.0f + (self.titleEdgeInsets.top + self.titleEdgeInsets.bottom) : 0) +
         (self.otherButtonTitles.count > 0 ? (self.canScrolling ? MIN(self.visibleButtonCount, self.otherButtonTitles.count) : self.otherButtonTitles.count) * self.buttonHeight : 0) +
         (self.cancelButtonTitle.length > 0 ? 5.0f + self.buttonHeight : 0) +
-        ([[UIDevice currentDevice] lc_isX] ? 34.0 : 0);
+        ([[UIDevice currentDevice] lc_isX] ? 34.0 : 0)+ (self.actionSheetEdgeInsets.left>0?5:0);
         make.height.equalTo(@(height));
+        
+    }];
+    [self.whiteBgView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bottomView).offset(self.actionSheetEdgeInsets.left);
+        make.right.equalTo(self.bottomView).offset(-self.actionSheetEdgeInsets.right);
+        make.bottom.equalTo(self.bottomView).offset(self.actionSheetEdgeInsets.left>0
+                                                    ?([[UIDevice currentDevice] lc_isX]?-34.f-self.buttonHeight-self.cancelButtonSheetGap:-self.buttonHeight-self.cancelButtonSheetGap)
+                                                    :0);
     }];
 }
 
@@ -740,28 +784,42 @@
 }
 
 - (void)updateTableView {
+
     if (!self.canScrolling) {
         [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@(self.otherButtonTitles.count * self.buttonHeight));
             make.top.equalTo(self.titleLabel.mas_bottom).offset(self.title.length > 0 ? self.titleEdgeInsets.bottom : 0);
+            make.left.equalTo(self.bottomView).offset(self.actionSheetEdgeInsets.left);
+            make.right.equalTo(self.bottomView).offset(-self.actionSheetEdgeInsets.right);
+
         }];
     } else {
         [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@(MIN(self.visibleButtonCount, self.otherButtonTitles.count) * self.buttonHeight));
             make.top.equalTo(self.titleLabel.mas_bottom).offset(self.title.length > 0 ? self.titleEdgeInsets.bottom : 0);
+            make.left.equalTo(self.bottomView).offset(self.actionSheetEdgeInsets.left);
+            make.right.equalTo(self.bottomView).offset(-self.actionSheetEdgeInsets.right);
         }];
     }
 }
 
 - (void)updateCancelButton {
     [self.divisionView mas_updateConstraints:^(MASConstraintMaker *make) {
-        CGFloat height = self.cancelButtonTitle.length > 0 ? 5.0f : 0;
+        CGFloat height = self.cancelButtonTitle.length > 0 ? 10.0f : 0;
         make.height.equalTo(@(height));
+        make.left.equalTo(self.bottomView).offset(self.actionSheetEdgeInsets.left);
+        make.right.equalTo(self.bottomView).offset(-self.actionSheetEdgeInsets.right);
+
     }];
-    
+    self.cancelButton.backgroundColor = self.cancelButtonBgColor;
+    self.cancelButton.clipsToBounds = YES;
+    self.cancelButton.layer.cornerRadius = self.buttonCornerRadius;
     [self.cancelButton mas_updateConstraints:^(MASConstraintMaker *make) {
         CGFloat height = self.cancelButtonTitle.length > 0 ? self.buttonHeight : 0;
         make.height.equalTo(@(height));
+        make.left.equalTo(self.bottomView).offset(self.actionSheetEdgeInsets.left);
+        make.right.equalTo(self.bottomView).offset(-self.actionSheetEdgeInsets.right);
+
     }];
 }
 
@@ -805,7 +863,7 @@
         strongSelf.darkView.userInteractionEnabled = !strongSelf.darkViewNoTaped;
         
         [strongSelf.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(strongSelf);
+            make.bottom.equalTo(strongSelf).offset(-strongSelf.actionSheetEdgeInsets.bottom);
         }];
         
         [strongSelf layoutIfNeeded];
