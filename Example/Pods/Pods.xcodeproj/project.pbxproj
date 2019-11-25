@@ -133,6 +133,7 @@
 		2983BEAF5F6062B2EC0F79CBE55F86BB /* Pods-LCActionSheet_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LCActionSheet_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		29CD635EE06B528910ACB7FEB18F2D65 /* LCActionSheetCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LCActionSheetCell.h; path = LCActionSheet/Classes/LCActionSheetCell.h; sourceTree = "<group>"; };
 		2DABDC044A50AD4533183AEAF8BCAA27 /* Pods-LCActionSheet_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LCActionSheet_Example-frameworks.sh"; sourceTree = "<group>"; };
+		34D69386B587B970C5A148C1A73007D8 /* RevealServer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RevealServer.framework; path = RevealServer/iOS/RevealServer.framework; sourceTree = "<group>"; };
 		37318B95E840B9F02239A4E621D97F90 /* LCActionSheet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LCActionSheet.framework; path = LCActionSheet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		425E8476B24545F8749B525A50437DFC /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASAdditions.h"; path = "Masonry/NSArray+MASAdditions.h"; sourceTree = "<group>"; };
 		455F370CF4CE68041D2147C50BF6A22B /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
@@ -148,7 +149,6 @@
 		5DA59E678A4687D760D56D2049B28533 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
 		61D90BB658E5AF645F81DAF70B3D4CB1 /* Pods-LCActionSheet_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LCActionSheet_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		64E485DA0C0B2165B55B4A46F66A9F12 /* Pods_LCActionSheet_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_LCActionSheet_Example.framework; path = "Pods-LCActionSheet_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6676E496C6D1642C1A4BD1B743BBC3B0 /* RevealServer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RevealServer.framework; path = "RevealServer-21/iOS/RevealServer.framework"; sourceTree = "<group>"; };
 		6951E716AA3B49849D94170DC5B288B0 /* LCActionSheet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LCActionSheet.m; path = LCActionSheet/Classes/LCActionSheet.m; sourceTree = "<group>"; };
 		6AE1E37551D9914C2753BB16A8094D7B /* View+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
 		6B28864E3F11E1DDE7AEF55AFFD8B0FE /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -309,17 +309,17 @@
 		1D51E30CBFB00741A741A72EE84B7B5F /* Reveal-SDK */ = {
 			isa = PBXGroup;
 			children = (
-				38A17551206366A0BCD801FCD8E9908E /* Frameworks */,
+				71EA75AD69DEA204CC4F135A32787256 /* Frameworks */,
 				7C85D2BFAA8E0AFC634025B1C806148D /* Support Files */,
 			);
 			name = "Reveal-SDK";
 			path = "Reveal-SDK";
 			sourceTree = "<group>";
 		};
-		38A17551206366A0BCD801FCD8E9908E /* Frameworks */ = {
+		71EA75AD69DEA204CC4F135A32787256 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6676E496C6D1642C1A4BD1B743BBC3B0 /* RevealServer.framework */,
+				34D69386B587B970C5A148C1A73007D8 /* RevealServer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -602,6 +602,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			productRefGroup = 08DA54027B4F5DF939E2B72C56FCBEB7 /* Products */;

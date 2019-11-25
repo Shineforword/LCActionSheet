@@ -2,14 +2,14 @@ PODS:
   - LCActionSheet (3.5.5):
     - Masonry (~> 1.1.0)
   - Masonry (1.1.0)
-  - Reveal-SDK (21)
+  - Reveal-SDK (24)
 
 DEPENDENCIES:
   - LCActionSheet (from `../`)
   - Reveal-SDK
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Masonry
     - Reveal-SDK
 
@@ -20,8 +20,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   LCActionSheet: e2cfc47a2438c411336fe314dd0e760d8df3d95a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  Reveal-SDK: 3523e0eb7c562811c51bb71da6e523a6373702c8
+  Reveal-SDK: 5d7e56b8f018c0a88b3a2c10bf68d598bbd3b071
 
 PODFILE CHECKSUM: d1c5359738e6459b34e6366aa6a8cd7fa303a04f
 
-COCOAPODS: 1.7.3
+COCOAPODS: 1.8.4

@@ -72,7 +72,7 @@
                                                     delegate:self
                                            cancelButtonTitle:@"Cancel"
                                            otherButtonTitles:@"Button 1", nil];
-
+    actionSheet.unBlur = YES;
 //  NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] init];
 //  [indexSet addIndex:1];
 //  [indexSet addIndex:2];
@@ -140,17 +140,23 @@
 //  LCActionSheetConfig *config = LCActionSheetConfig.config;
 //  config.buttonColor = [UIColor orangeColor];
 
-  LCActionSheet *actionSheet = [LCActionSheet sheetWithTitle:@"Block LCActionSheet" cancelButtonTitle:@"Cancel" clicked:^(LCActionSheet *actionSheet, NSInteger buttonIndex) {
+  LCActionSheet *actionSheet = [LCActionSheet sheetWithTitle:@"clickedButtonAtIndexclickedButtonAtIndexclickedButtonAtIndexclickedButtonAtIndex" cancelButtonTitle:@"Cancel" clicked:^(LCActionSheet *actionSheet, NSInteger buttonIndex) {
 
     NSLog(@"clickedButtonAtIndex: %d, keyWindow: %p", (int)buttonIndex, KEY_WINDOW);
 
-  } otherButtonTitles:@"Button 1", @"Button 2", @"Button 3", @"Button 4", @"Button 5", @"Button 6", nil];
+  } otherButtonTitles:@"Button 1", @"Button 2", nil];
 
 //  actionSheet.blurEffectStyle = UIBlurEffectStyleLight;
 
-  actionSheet.scrolling          = YES;
-  actionSheet.visibleButtonCount = 3.6f;
-
+  actionSheet.scrolling          = NO;
+  actionSheet.unBlur = YES;
+  actionSheet.titleEdgeInsets  = UIEdgeInsetsMake(10, 22, 10, 22);
+  actionSheet.actionSheetEdgeInsets = UIEdgeInsetsMake(0, 15, 15, 15);
+  actionSheet.buttonCornerRadius = 5;
+  actionSheet.cancelButtonBgColor = [UIColor whiteColor];
+  actionSheet.backgroundColor = kLCActionSheetColor(153, 153, 153);
+  actionSheet.separatorColor = kLCActionSheetColor(153, 153, 153);
+  actionSheet.darkViewBgColor = kLCActionSheetColor(153, 153, 153);
   actionSheet.willPresentHandler = ^(LCActionSheet *actionSheet) {
     NSLog(@"willPresentActionSheet, keyWindow: %p", KEY_WINDOW);
   };
@@ -169,18 +175,6 @@
 
   [actionSheet show];
 
-
-  // Append buttons methods
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.0f * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-//    [actionSheet appendButtonWithTitle:@"WoW" atIndex:7];
-
-    NSMutableIndexSet *set = [[NSMutableIndexSet alloc] init];
-    [set addIndex:1];
-    [set addIndex:2];
-    [actionSheet appendButtonsWithTitles:@[@"Hello", @"World"] atIndexes:set];
-
-//    [actionSheet setButtonTitle:@"New Title" atIndex:1];
-  });
 }
 
 - (IBAction)onChangeStyleAction {
