@@ -154,9 +154,10 @@
   actionSheet.actionSheetEdgeInsets = UIEdgeInsetsMake(0, 15, 15, 15);
   actionSheet.buttonCornerRadius = 5;
   actionSheet.cancelButtonBgColor = [UIColor whiteColor];
-  actionSheet.backgroundColor = kLCActionSheetColor(153, 153, 153);
-  actionSheet.separatorColor = kLCActionSheetColor(153, 153, 153);
-  actionSheet.darkViewBgColor = kLCActionSheetColor(153, 153, 153);
+  actionSheet.backgroundColor = kLCActionSheetColorA(153, 153, 153,0.3);
+  actionSheet.separatorColor = kLCActionSheetColorA(153, 153, 153,0.3);
+  actionSheet.darkViewBgColor = kLCActionSheetColorA(153, 153, 153,0.3);
+    actionSheet.cancelButtonSheetGap = 10;
   actionSheet.willPresentHandler = ^(LCActionSheet *actionSheet) {
     NSLog(@"willPresentActionSheet, keyWindow: %p", KEY_WINDOW);
   };

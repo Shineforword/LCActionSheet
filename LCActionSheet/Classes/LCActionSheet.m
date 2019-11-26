@@ -394,7 +394,7 @@
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(bottomView);
         make.bottom.equalTo(tableView.mas_top);
-        make.height.offset(0.5 / 3.0);
+        make.height.offset(0.5);
     }];
     self.lineView = lineView;
     
@@ -770,6 +770,11 @@
                                                     ?([[UIDevice currentDevice] lc_isX]?-34.f-self.buttonHeight-self.cancelButtonSheetGap:-self.buttonHeight-self.cancelButtonSheetGap)
                                                     :0);
     }];
+    [self.lineView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bottomView).offset(self.actionSheetEdgeInsets.left);
+        make.right.equalTo(self.bottomView).offset(-self.actionSheetEdgeInsets.right);
+    }];
+    self.divisionView.hidden = (self.cancelButtonSheetGap>0)?YES:NO;
 }
 
 - (void)updateTitleLabel {

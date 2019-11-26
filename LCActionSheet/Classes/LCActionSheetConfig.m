@@ -76,7 +76,7 @@
         
         /* 新增*/
         self.actionSheetEdgeInsets    = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
-        self.cancelButtonSheetGap     = 10;
+        self.cancelButtonSheetGap     = 0;
         self.darkViewBgColor          = kLCActionSheetColor(46, 49, 50);
         /*..................*/
         
